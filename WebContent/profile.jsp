@@ -26,8 +26,16 @@
 	%>
 	<label style="align:center; font-weight:bold;"><%=positionName %></label><br>
 	<%
+			int count = 0;
 			for(String candidate: candidateList)
 			{
+				if(count>0 && count%3==0)
+				{
+					%>
+					<br>
+					<%
+				}
+				count++;
 				String[] candidateInfo = candidate.split(":");
 	%>
 	<input type="radio" name="<%=positionName%>" value="<%=candidateInfo[0]%>"><%=candidateInfo[1] %><br>

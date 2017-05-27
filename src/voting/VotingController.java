@@ -42,8 +42,16 @@ public class VotingController extends HttpServlet {
 			System.out.println(this.getClass().getSimpleName()+" Debug1: Election ID for voting is "+electionId);
 			Statement st = conn.createStatement();
 			
-			String sql = "select POSITION_NAME from election_positions where election_id="+electionId;
+			String sql = "select * from election_votes where election_id="+electionId+" AND voter_id="+request.getParameter("member_id");
 			ResultSet rs = st.executeQuery(sql);
+			if(rs.next())
+			{
+				System.out.println("You have already casted your vote!");
+				return;
+			}
+			
+			sql = "select POSITION_NAME from election_positions where election_id="+electionId;
+			rs = st.executeQuery(sql);
 			
 			while(rs.next())
 			{
